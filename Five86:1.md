@@ -11,3 +11,6 @@ What stands out to me is the file **robots.txt** under port 80. It has a path of
 
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/90168f74-7a78-49c2-a5f0-80b3ed46f3a3" />
 
+I'll then take the IP of the vulnerable machine and paste it into a tab with **/ona** appended to it.
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/acf7125b-a7ec-424f-8434-4358d8c62d24" />
