@@ -1,5 +1,6 @@
 # Dripping Blues: 1
 
+# Enumeration
 First step as always is to run the **netdiscover** command to see what IPs are currently live on the network. I can see the **192.168.146.130** address is going to be tagret machine's IP. I will then ping that address to confirm it'll send me ICMP packets which it did.
 
 <img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/8d4669e6-4f12-48f5-bafc-5ef00752bf6e" />
@@ -22,6 +23,7 @@ I checked to see if the **/etc/passwd** file would display the contents of it wh
 
 <img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/f51168ea-a33f-49e7-9aec-626bb63effb0" />
 
+# Execution
 I can see in the bottom left corner the username **thugger** which means this will be a quick and easy ssh into that account. I accessed my root terminal and used the command **ssh thugger@192.168.146.130**. I am then prompted with being asked if I'd like to continue the connection which I say yes to. Finally, I'll enter the password that was displayed in the body of the HTML earlier which allows for a successful logi.
 
 <img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/c3575a14-6877-4ba9-851e-4c7224bd24cf" />
