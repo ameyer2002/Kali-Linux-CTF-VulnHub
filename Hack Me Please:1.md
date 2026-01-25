@@ -53,6 +53,17 @@ I updated the new hash in the DB so I can now successfully login with the userna
 
 <img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/6ff3e176-663f-405b-9161-30a51a055eec" />
 
-I then found this php reverse shell created by pentestmonkey. I changed the IP address in the script to the target machine's IP and the mysql port as well. After doing this, I downloaded the file as a .php file and uploaded it in the document section.
+I then found this php reverse shell created by pentestmonkey. I changed the IP address in the script to the Kali Linux IP and the listening port as well to 4444. In the terminal, I started listening on port 4444 with this command **nc -lnvp 4444**. After doing this, I downloaded the file as a .php file and uploaded it in the document section.
 
 <img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/57557ab6-3ee2-4366-b37a-b52a976b9592" />
+
+To execute the reverse shell, I entered this into a new tab **http://192.168.146.131/seeddms51x/data/1048576/23/1.php** and let it hang for a few seconds. I then went back to my terminal and saw the reverse shell had spawned.
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/6401b558-dc02-4f07-8341-2c183e5a9ce8" />
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/1d26f6ea-ee0c-4ef4-8892-15a205ad9255" />
+
+Now that I've spawned a reverse shell, I wanted to upgrade the usability of it since the shell was pretty limited in terms of commands I could use. I ran this command **python3 -c "import pty; pty.spawn('/bin/bash')"** which spawned a more interactive shell. From here I ran the command **su saket** and then entered the password I retrieved earlier from the mysql DB, **Saket@#$1337**.
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/b9a2e7af-b8d1-4473-99af-736e0f463c70" />
+
+From here, I just ran **sudo /bin/bash**, used Saket's password, and entered the root account which finishes off this CTF!
