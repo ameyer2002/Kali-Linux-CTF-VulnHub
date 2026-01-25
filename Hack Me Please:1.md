@@ -53,6 +53,6 @@ I updated the new hash in the DB so I can now successfully login with the userna
 
 <img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/6ff3e176-663f-405b-9161-30a51a055eec" />
 
-I then found this php reverse shell created by pentestmonkey. I changed the IP address in the script to the target machine's IP and the mysql port as well. AFter doing this, I downloaded the file as a .php file and uploaded it in the document section.
+I then found this php reverse shell created by pentestmonkey. I changed the IP address in the script to the target machine's IP and the mysql port as well. After doing this, I downloaded the file as a .php file and uploaded it in the document section.
 
 <img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/57557ab6-3ee2-4366-b37a-b52a976b9592" />
