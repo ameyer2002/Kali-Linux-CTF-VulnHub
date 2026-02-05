@@ -27,3 +27,6 @@ This worked out perfectly!
 
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/85701555-7cff-435c-b1de-49cbeaab8e7a" />
 
+Okay, now I'll have to fuzz different parameters with the same value that are appended to the URL What this does is it tries a list of common parameter names on index.php, ignores the normal response, and shows me only parameters that cause a different response. This will allow for a RCE attack. The command I ran was **wfuzz  --filter 'h!=329' -c -w /usr/share/dirb/wordlists/common.txt  http://192.168.146.132/index.php?FUZZ=a**. The wfuzz runs the fuzzer. The -w /usr/share/dirb/wordlists/common.txt uses the common dirb wordlist as payloads. Each word replaces FUZZ. The IP is the target URL and I am changing the parameter names, not values of the parameters. The --filter 'h!=329'shows the number of response lines and hides responses that have exactly 329 lines. This is because 329 lines is the default response for invalid parameters and any parameter that changes server behavior will usually change response size. So the only path available is **path**.
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/743c0452-f401-4a33-a102-c6b0a9e09f6e" />
