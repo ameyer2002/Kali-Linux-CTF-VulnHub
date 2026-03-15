@@ -14,3 +14,9 @@ What I did from here was create a python env so I could install **git-dumper** w
 
 From here, I ran **git-dumper http://192.168.19.129/.git dumped_site** which created a folder called dumped_site/ and downloaded the exposed git repo there. To find logs on previous commits done in this repo, I ran **git log** which showed 3 commits. One was indicating that the user added default credentials into a php file. I then used **git show a4d900** which showed me the changes the user made in this commit. I can see the email used for the dark hole website login is **lush@admin.com** and the password is **321**. From here, I can go back to the website and login with these credentials.
 
+Once I'm logged in, I do some digging around to see if I can find anything that could lead me to my next move. Looking in the URL as a logged in user, there is a parameter of **id** that has a value of 1. I had to do some research to see what tool would be best for this use case given the parameter. I found that sqlmap would be the best tool to use here as this automates the process of detecting and exploiting SQL injection flaws. Before using this tool, I would have to use Burp to capture an HTTP request since the parameter is only visible once I'm logged in so I need the cookie to set the connection.
+
+After capturing the HTTP request and then saving it as a file, I can run **sqlmap -r dark --dump-run**. The -r is used to read the file which I named dark.
+
+During the scan, the injections are successful and return two tables, a user table and a ssh table. This worked so I can now ssh into jehad's account. I run the command **ssh jehad@192.168.19.129**, input the password **fool** and I'm in the account.
+
