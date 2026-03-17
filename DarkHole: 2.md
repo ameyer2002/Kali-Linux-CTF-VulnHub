@@ -4,7 +4,7 @@ As always, starting my lab with a netdiscover command to see what machines are c
 
 <img width="1280" height="392" alt="Kali-2026-03-14-09-10-14" src="https://github.com/user-attachments/assets/cbc303c5-15cc-44d6-89a1-cf3e41f21cee" />
 
-I then run a nmap scan to see what ports are open: **nmap -Pn -sS -sC --script vuln 192.168.19.129**. Ports 22 and 80 are open. What's interesting is that there is an exposed route **/.git/** under port 80.
+I then run a nmap scan to see what ports are open: **nmap -Pn -sS -sC --script vuln 192.168.19.129**. I've been using this [resource](https://www.geeksforgeeks.org/linux-unix/top-30-basic-nmap-commands-for-beginners/) to learn about additional nmap commandsPorts 22 and 80 are open. What's interesting is that there is an exposed route **/.git/** under port 80.
 
 <img width="1718" height="920" alt="kali-linux-2025 4-vmware-amd64-2026-03-13-14-40-20" src="https://github.com/user-attachments/assets/ecd2aebd-1c21-4182-b060-3b3235abf915" />
 
