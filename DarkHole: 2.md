@@ -10,7 +10,7 @@ I then run a nmap scan to see what ports are open: **nmap -Pn -sS -sC --script v
 
 <img width="1718" height="920" alt="kali-linux-2025 4-vmware-amd64-2026-03-13-14-52-58" src="https://github.com/user-attachments/assets/70a95d14-b335-4511-9d6b-1f615a0d1175" />
 
-What I did from here was create a python env so I could install **git-dumper** which works similarly to wget but this tool works specifically for github repos. The **pip** command doesn't work in my terminal, hence why I created the env for this. I ran the following commands to create my env, activate it, and install git-dumper:
+What I did from here was create a python env so I could install [**git-dumper**](https://github.com/arthaud/git-dumper) which works similarly to wget but this tool works specifically for github repos. The **pip** command doesn't work in my terminal, hence why I created the env for this. I ran the following commands to create my env, activate it, and install git-dumper:
 
 * python3 -m venv gitdumper-env
 * source gitdumper-env/bin/activate
