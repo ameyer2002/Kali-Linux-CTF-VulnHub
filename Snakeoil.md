@@ -43,8 +43,14 @@ I was able to create a new user and was provided with an API token. After going 
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/b65ed1de-f685-43d8-96a4-bb2dd999601d" />
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/d8f8ecc2-fcc5-42b6-9c67-0a4adb4d163b" />
 
-eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc3NTQyODY1OSwianRpIjoiNjlmYTQyMTgtZWJmNS00OGIzLTg4NmYtYzQ1NjcxMDNkMzM1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImJydWgiLCJuYmYiOjE3NzU0Mjg2NTksImV4cCI6MTc3NTQyOTU1OX0.i_oC3UDZldCcGNg1GLN_4OVdbxObPzTh9iVFCVNZvDY
+access token 1: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc3NTQyODY1OSwianRpIjoiNjlmYTQyMTgtZWJmNS00OGIzLTg4NmYtYzQ1NjcxMDNkMzM1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImJydWgiLCJuYmYiOjE3NzU0Mjg2NTksImV4cCI6MTc3NTQyOTU1OX0.i_oC3UDZldCcGNg1GLN_4OVdbxObPzTh9iVFCVNZvDY
 
-I kept the same request in burp repeater and was modifying it. Now that I had an account created, I could access the /login directory with the account I created. I changed my request to POST and the path to the /login directory. The server returned the same access token but also provided a refresh token.
+I kept the same request in burp repeater and was modifying it. Now that I had an account created, I could access the /login directory with the account I created. I changed my request to POST and the path to the /login directory. The server returned the a different access token and also provided a refresh token.
 
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/30645aeb-fa4c-4013-aa6c-8032005a84c8" />
+
+From here, I checked the /secret directory and received an internal server error using a GET request. I switched to a POST method but received a message stating that method is not allowed.
+
+access token 2: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc3NTQyOTEyMywianRpIjoiNTNiNjVmYmYtY2U4OS00NDYyLTg1NDktYzg2MDkyZTUyY2FlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImJydWgiLCJuYmYiOjE3NzU0MjkxMjMsImV4cCI6MTc3NTQzMDAyM30._u9Kx_ShAYntJ4F8E2l6NP4e9s6jiRqfQXmu8EaM6LU
+
+Refresh token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc3NTQyOTEyMywianRpIjoiZDMxMzYyYTMtZWI5OS00M2IyLThlZGQtMTk4MjlhNDI2ZWQ5IiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJicnVoIiwibmJmIjoxNzc1NDI5MTIzLCJleHAiOjE3NzU0MzI3MjN9.M3tIu0HDKjOa0Rf66RP22JpHRHKRIhPRUlCBl0ph3ho
