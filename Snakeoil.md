@@ -37,3 +37,14 @@ The other directory I explored was /registration which simply had a message rega
 From here, I opened Burp so I could intercept a request and change the method. I did this and changed the request to a POST method and sent it to the server. I received an interesting return about the username field. Username field cannot be blank so I changed my request to include a username.
 
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/7e050409-3edd-4019-9544-85c4de7a3ddb" />
+
+I was able to create a new user and was provided with an API token. After going back to the /users direcotry, I can confirm my new account was created.
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/b65ed1de-f685-43d8-96a4-bb2dd999601d" />
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/d8f8ecc2-fcc5-42b6-9c67-0a4adb4d163b" />
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc3NTQyODY1OSwianRpIjoiNjlmYTQyMTgtZWJmNS00OGIzLTg4NmYtYzQ1NjcxMDNkMzM1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImJydWgiLCJuYmYiOjE3NzU0Mjg2NTksImV4cCI6MTc3NTQyOTU1OX0.i_oC3UDZldCcGNg1GLN_4OVdbxObPzTh9iVFCVNZvDY
+
+I kept the same request in burp repeater and was modifying it. Now that I had an account created, I could access the /login directory with the account I created. I changed my request to POST and the path to the /login directory. The server returned the same access token but also provided a refresh token.
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/30645aeb-fa4c-4013-aa6c-8032005a84c8" />
