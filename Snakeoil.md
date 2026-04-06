@@ -6,7 +6,7 @@ As always, I like to start reconaissance with a **netdiscover** command to see w
 
 After I found the IP associated with the target machine, I then run a nmap scan. I have recently been including **--script vuln** in my scan to show any exposed paths or vulnerabilities associated with each open port on the machine. I ran **nmap -sS -sV --script vuln 192.168.19.131** and the following was returned:
 
-<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/0fb81217-2408-4dc3-afc3-ef9b8d948aa2" />
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/0fb81217-2408-4dc3-afc3-ef9b8d948aa2" /> 
 
 I checked the host on port 80 but there wasn't much there.
 
@@ -43,14 +43,30 @@ I was able to create a new user and was provided with an API token. After going 
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/b65ed1de-f685-43d8-96a4-bb2dd999601d" />
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/d8f8ecc2-fcc5-42b6-9c67-0a4adb4d163b" />
 
-access token 1: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc3NTQyODY1OSwianRpIjoiNjlmYTQyMTgtZWJmNS00OGIzLTg4NmYtYzQ1NjcxMDNkMzM1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImJydWgiLCJuYmYiOjE3NzU0Mjg2NTksImV4cCI6MTc3NTQyOTU1OX0.i_oC3UDZldCcGNg1GLN_4OVdbxObPzTh9iVFCVNZvDY
-
 I kept the same request in burp repeater and was modifying it. Now that I had an account created, I could access the /login directory with the account I created. I changed my request to POST and the path to the /login directory. The server returned the a different access token and also provided a refresh token.
 
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/30645aeb-fa4c-4013-aa6c-8032005a84c8" />
 
-From here, I checked the /secret directory and received an internal server error using a GET request. I switched to a POST method but received a message stating that method is not allowed.
+From here, I checked the /secret directory and received an internal server error using a GET request. I switched to a POST method but received a message stating that method is not allowed. At this point I wasn't quite sure what to do so I navigated back to the JWT documentation which I had a feeling would have some sort of clue or information that would help me use the access tokens I received earlier. I did end up finding that **access_token_cookie** could be added to my request with the access tokens I have.
 
-access token 2: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc3NTQyOTEyMywianRpIjoiNTNiNjVmYmYtY2U4OS00NDYyLTg1NDktYzg2MDkyZTUyY2FlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImJydWgiLCJuYmYiOjE3NzU0MjkxMjMsImV4cCI6MTc3NTQzMDAyM30._u9Kx_ShAYntJ4F8E2l6NP4e9s6jiRqfQXmu8EaM6LU
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/3ec577b4-915a-49cf-b957-f59acb13933d" />
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/b48bc44b-ec1a-42f6-a888-37a5c4a19593" />
 
-Refresh token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc3NTQyOTEyMywianRpIjoiZDMxMzYyYTMtZWI5OS00M2IyLThlZGQtMTk4MjlhNDI2ZWQ5IiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJicnVoIiwibmJmIjoxNzc1NDI5MTIzLCJleHAiOjE3NzU0MzI3MjN9.M3tIu0HDKjOa0Rf66RP22JpHRHKRIhPRUlCBl0ph3ho
+This is awesome. I was given the secret key. Now I want to check out the /run directory as this is the only directory I have yet to check. I can add the url and secret key parameters to the header of my requests to see what gets returned.
+
+At the end of the response, there are some python files that I wanted to check out. I read the app.py file which is the source code for the application and found Patrick's password.
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/2b9c0aa4-a35c-4a12-8b00-fae5ebafd426" />
+
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/0353995d-bfef-4745-a2b9-6b845157b666" />
+
+I could now ssh into Patrick's account with that password:
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/25278bfc-fed8-4157-8406-e098b81c7c9a" />
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/88a9f515-0bbe-4f18-96c1-7a3d2e74828b" />
+
+I explored around a bit and eventually tried running **sudo su -** to see if I could get root access without having to dig around more and it worked!
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/23dbba38-87ab-4bef-8414-241314ecb3ce" />
