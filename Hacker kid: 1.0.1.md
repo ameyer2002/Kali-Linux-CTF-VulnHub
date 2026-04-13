@@ -17,3 +17,9 @@ I like to inspect the web app as part of my reconaissance to see if any notes ar
 That parameter feels like it can be exposed through a brute force. To achieve this, I can use Burp to capture a GET request and then use repeater to send in different payloads to the value of the parameter. I'll start with a range of 1-50 and see if any of the payloads used have a noticeably different length that could be used to expose this parameter. I'll place the payload on the value of the parameter and change the payload type to numbers.
 
 <img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/68d13a78-e78e-49b0-af71-95794dd78ced" />
+
+Looking at the payload value of 21, I see the length is much longer than all other payloads used. I'll put 21 in the URL and see what that shows.
+
+<img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/69d25ba0-c3ad-4c1e-8b8b-42ea3aa18fb6" />
+
+<img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/c8bba3ce-f455-4775-9859-ec6ccbb8d3ff" />
