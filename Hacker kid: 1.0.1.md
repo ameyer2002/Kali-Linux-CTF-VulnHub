@@ -23,3 +23,8 @@ Looking at the payload value of 21, I see the length is much longer than all oth
 <img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/69d25ba0-c3ad-4c1e-8b8b-42ea3aa18fb6" />
 
 <img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/c8bba3ce-f455-4775-9859-ec6ccbb8d3ff" />
+
+Earlier when I accessed the web app, there was a message on the bottom of the screen that emphasized Dig which I knew had to be a clue to run the dig command eventually. Once I was able to get the subdomain, **hackers.blackhat.local**, to appear, I could run the dig command to check if there were any other subdomains associated with the IP. I ran the command **dig hackers.blackhat.local @192.168.19.134** and found a subdomain called **hackerkid.blackhat.local**.
+
+<img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/a3f2021c-215c-46c4-a185-a4497207ebec" />
+<img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/b45d1aa5-0c34-4f89-bc9d-3d6c985c004c" />
