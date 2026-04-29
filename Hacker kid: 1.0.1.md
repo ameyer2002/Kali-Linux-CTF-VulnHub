@@ -28,3 +28,7 @@ Earlier when I accessed the web app, there was a message on the bottom of the sc
 
 <img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/a3f2021c-215c-46c4-a185-a4497207ebec" />
 <img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/b45d1aa5-0c34-4f89-bc9d-3d6c985c004c" />
+
+From here, I entered information into each of those parameters but everytime I selected register, it said my email could not be used. I used Burp to capture the request to see how it was being sent to the web server and saw it was using XML. I did some digging around and found how to perform a XML injection attack. In my payload of my request, I added **<!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>** and used **&xxe;** as the email value while keeping all other parameters empty. Once I sent this request, I was returned the content of the file.
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/fddd3a33-5ed1-44a3-8040-d2826226d5d8" />
